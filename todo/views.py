@@ -44,11 +44,6 @@ def completeTodo(request, todo_id):
     return redirect('index')
 
 def deleteCompleted(request):
-    Todo.objects.filter(complete__exact=True).delete()
-
-    return redirect('index')
-
-def deleteAll(request):
-    Todo.objects.all().delete()
+    Todo.objects.filter(complete__exact=True,creator=request.user.username).delete()
 
     return redirect('index')
